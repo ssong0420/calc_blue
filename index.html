@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공학용 계산기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .calculator {
+            width: 400px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .display {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 20px;
+            padding: 8px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: right;
+            background-color: #f9f9f9;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #2196f3; /* 파란색 배경색 */
+            color: #ffffff; /* 흰색 텍스트 */
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1976d2; /* 더 짙은 파란색 */
+        }
+
+        button:active {
+            background-color: #0d47a1; /* 더 어두운 파란색 */
+        }
+
+        button.wide {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" readonly />
+        <div class="buttons">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="deleteLast()">CE</button>
+            <button onclick="insertValue('(')">(</button>
+            <button onclick="insertValue(')')">)</button>
+            <button onclick="insertValue('^')">^</button>
+            <button onclick="insertValue('7')">7</button>
+            <button onclick="insertValue('8')">8</button>
+            <button onclick="insertValue('9')">9</button>
+            <button onclick="insertValue('/')">/</button>
+            <button onclick="insertValue('*')">*</button>
+            <button onclick="insertValue('4')">4</button>
+            <button onclick="insertValue('5')">5</button>
+            <button onclick="insertValue('6')">6</button>
+            <button onclick="insertValue('-')">-</button>
+            <button onclick="insertValue('+')">+</button>
+            <button onclick="insertValue('1')">1</button>
+            <button onclick="insertValue('2')">2</button>
+            <button onclick="insertValue('3')">3</button>
+            <button onclick="insertValue('sqrt()')">√</button>
+            <button onclick="insertValue('log(')">log</button>
+            <button onclick="insertValue('0')">0</button>
+            <button onclick="insertValue('.')">.</button>
+            <button class="wide" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+
+        function insertValue(value) {
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value);
+            } catch (e) {
+                display.value = '오류';
+            }
+        }
+    </script>
+</body>
+
+</html>
